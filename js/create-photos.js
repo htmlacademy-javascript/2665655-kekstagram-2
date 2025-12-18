@@ -1,9 +1,9 @@
-import { NAMES,MESSAGES } from "./data.js";
-import {getRandomNumber,createIdGenerator,getRandomItem} from "./util.js";
+import { NAMES,MESSAGES } from './data.js';
+import {getRandomNumber,createIdGenerator,getRandomItem} from './util.js';
 
 
-const MIN_likes = 15;
-const MAX_likes = 200;
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
 const MIN_COMMENTS = 0;
 const MAX_COMMENTS = 200;
 
@@ -37,7 +37,7 @@ const createPhotos = () => {
       id: i,
       url: `photos/${i}.jpg`,
       description: 'Перед нами интересная, необычная фотография.',
-      likes: getRandomNumber(MIN_likes, MAX_likes),
+      likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
       comments: createComments()
     };
     photos.push(photo);
