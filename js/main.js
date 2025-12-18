@@ -1,3 +1,3 @@
-import {createPhotos} from "./creat-photos.js";
+import './thumbails';
 
-console.log(createPhotos());
+
