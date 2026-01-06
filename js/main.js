@@ -1,4 +1,6 @@
+import { createPhotos } from './create-photos';
 import './thumbails';
-// import { openBigPicture } from './big-picture';
+import { renderMiniatures } from './thumbails';
 
-// openBigPicture();
+const photos = createPhotos();
+renderMiniatures(photos);
