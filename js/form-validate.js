@@ -1,3 +1,6 @@
+import { closeForm } from './form';
+import { sendData } from './server.js';
+
 const HASHTAG_REGEX = /^#[a-zа-яё0-9]{1,19}$/i ;
 
 // Переменная для вывода ошибок
@@ -11,7 +14,7 @@ const STEP = 25; // шаг изменения в процентах
 const MIN_VALUE = 25; // минимальное значение %
 const MAX_VALUE = 100; // максимальное значение %
 
-const form = document.querySelector('.img-upload__overlay');
+const form = document.querySelector('.img-upload__form');
 const hashtagsInput = form.querySelector('.text__hashtags');
 const textFormDescription = document.querySelector('.text__description');
 const imgEffect = document.querySelector('.img-upload__preview img');
@@ -92,7 +95,12 @@ pristine.addValidator(textFormDescription, isValidComment ,ErrorMessage.COMMENTS
 
 form.addEventListener('submit', (evt) =>{
   evt.preventDefault();
-  pristine.validate();
+  if(pristine.validate()){
+    sendData(new FormData(evt.target))
+      .then(() => {
+        closeForm();
+      });
+  }
 });
 
 
