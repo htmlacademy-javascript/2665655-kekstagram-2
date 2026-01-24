@@ -22,6 +22,7 @@ const renderComments = (comments) => {
     const commentAuthor = commentTemplate.querySelector('.social__picture');
     commentAuthor.src = comment.avatar;
     commentAuthor.alt = comment.name;
+    commentTemplate.querySelector('.social__text').textContent = comment.message;
     fragment.appendChild(commentTemplate);
   });
   socialComments.appendChild(fragment);
@@ -30,8 +31,7 @@ const renderComments = (comments) => {
 
   if (count >= totalComments.length) {
     commentsLoader.classList.add('hidden');
-  }
-  else {
+  } else {
     commentsLoader.classList.remove('hidden');
   }
 };

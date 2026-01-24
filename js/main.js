@@ -1,6 +1,19 @@
-import { createPhotos } from './create-photos';
-import './thumbails';
-import { renderMiniatures } from './thumbails';
+import { renderMiniatures } from './thumbails.js';
+import { initForm } from './form.js';
+import './form-effects.js';
+import { getData } from './server.js';
+import { showError } from './form-message.js';
+import { initFilters } from './filters-img.js';
+import { initUploadFile } from './avatar.js';
 
-const photos = createPhotos();
-renderMiniatures(photos);
+getData()
+  .then((photos) => {
+    renderMiniatures(photos);
+    initFilters(photos);
+  })
+  .catch(() => {
+    showError();
+  });
+
+initForm();
+initUploadFile();
