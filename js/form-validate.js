@@ -1,6 +1,6 @@
 import { closeForm } from './form.js';
 import { sendData } from './server.js';
-import { showSuccess,showTimeError} from './form-message.js';
+import { showSuccess,showError} from './form-message.js';
 
 const form = document.querySelector('.img-upload__form');
 const hashtagsInput = form.querySelector('.text__hashtags');
@@ -96,17 +96,6 @@ hashtagsInput.addEventListener('keydown',(evt) => {
 textFormDescription.addEventListener('keydown',(evt) => {
   evt.stopPropagation();
 });
-// Функция для успешной формы окна
-
-const frameMessage = (evt) => {
-  evt.stopPropagation();
-};
-
-document.addEventListener('click', (evt) => {
-  if (evt.target.closest('.success__inner') || evt.target.closest('.error__inner')) {
-    evt.stopPropagation();
-  }
-});
 
 pristine.addValidator(hashtagsInput,isValidHashtags, ErrorMessage.INVALID);
 pristine.addValidator(hashtagsInput,isValidCountHashtags, ErrorMessage.COUNT);
@@ -123,18 +112,9 @@ form.addEventListener('submit', (evt) => {
       .then(() => {
         showSuccess();
         closeForm();
-        const onSuccessMessage = document.querySelector('.success__inner');
-        const onErrorInner = document.querySelector('.error__inner');
-        if(onSuccessMessage){
-          onSuccessMessage.addEventListener('click', frameMessage);
-        }else {
-          if(onErrorInner){
-            onErrorInner.addEventListener('click', frameMessage);
-          }
-        }
       })
       .catch(() => {
-        showTimeError();
+        showError();
       })
       .finally(() => {
         submitFormBtn.disabled = false;
@@ -144,8 +124,13 @@ form.addEventListener('submit', (evt) => {
 
 const resetValidate = () => pristine.reset();
 
-// Обработчики для масштаба изоображение в форме
+document.addEventListener('click', (evt) => {
+  if (evt.target.closest('.success__inner') || evt.target.closest('.error__inner')) {
+    evt.stopPropagation();
+  }
+});
 
+// Обработчики для масштаба изоображение в форме
 onClickSmaller.addEventListener('click', smaller);
 onClickBigger.addEventListener('click', bigger);
 
