@@ -31,8 +31,8 @@ const showSuccess = () => {
     closeSuccess();
   });
 
-  successMessage.addEventListener('click', () => {
-    if(successMessage.classList.contains('success')){
+  successMessage.addEventListener('click', (evt) => {
+    if(evt.target.classList.contains('success')){
       closeSuccess();
     }
   });
@@ -51,8 +51,8 @@ const showError = () => {
   const errorMessage = errorTemplate.cloneNode('true');
   body.appendChild(errorMessage);
 
-  const closeError = (evt) => {
-    evt.target.remove();
+  const closeError = () => {
+    errorMessage.remove();
     document.removeEventListener('keydown', onKeydownClickError);
   };
   errorMessage.querySelector('.error__button').addEventListener('click', () => {
